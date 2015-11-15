@@ -144,9 +144,24 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 9. Fijémonos en las tramas siguientes a la número 46:
  ** ¿Se registra con éxito en el primer intento?
+
+    En la captura, en la trama 50 podemos ver que en el primer intento no se registra con éxito, ya que el servidor envía una respuesta de 401 Unauthorized. Este mensaje aparece porque el cliente
+    se debe identificar para que se pueda registrar con éxito.
+
  ** ¿Cómo sabemos si el registro se ha realizado correctamente o no?
+
+    Sabemos si el registro se ha realizado correctamente o no viendo la trama de respuest SIP del servidor, si se ha realizado correctamente el servidor enviará 200 OK.
+
  ** ¿Podrías identificar las diferencias entre el primer intento y el segundo de registro? (fíjate en el tamaño de los paquetes y mira a qué se debe el cambio)
+
+    Podemos ver que se diferencian por el tamaño, en el primer REGISTER se envían 523 bytes, mientras que en el segundo se envían 712. Esto se debe a que en el segundo intento se incluye la línea:
+    Authorization: Digest username="grex", realm="ekiga.net", nonce="45a439ee7438aaea43ae8c7c2382922187f86c8b", uri="sip:ekiga.net", algorithm=md5, response="5267d4e49d707d4443baefa913e8ff90".
+    Lo que sucede es que en el primer intento no se identifica, entonces el servidor le manda un mensaje de no autorizado con el campo Nonce (nonce="45a439ee7438aaea43ae8c7c2382922187f86c8b"), que será
+    la clave con la que se deba identificar en el próximo intento que realice, esto lo vemos en la línea anterioe en Authorization en nonce.
+
  ** ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica las unidades.
+
+    El tiempo de expiración de la sesión se indica en el campo Message Header, en Expires. El valor del tiempo de expiración de la sesión es 3600 segundos.
 
 
 10. Una vez registrados, podemos efectuar una llamada. Vamos a probar con el servicio de eco de Ekiga que nos permite comprobar si nos hemos conectado correctamente. El servicio de eco tiene la dirección sip:500@ekiga.net. Veamos el INVITE de cerca.
