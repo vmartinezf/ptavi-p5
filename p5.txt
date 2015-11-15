@@ -120,10 +120,24 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 8. La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor Registrar. El Registrar guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
  ** ¿Qué dirección IP tiene el servidor Registrar?
+
+    En la trma 46 podemos ver cuál es la dirección IP que tiene el servidor Registrar, ya que la máquina 192.168.1.34 envía la trama con método REGISTER al servidor Register.
+    La dirección IP del servidor Registrar es: 86.64.162.35
+
  ** ¿A qué puerto (del servidor Registrar) se envían los paquetes SIP?
+
+    Los paquetes SIP se envían al puerto 5060 del servidor Registrar. Esto se ve en el campo User Datagram Protocol, en Destiation Port.
+
  ** ¿Qué método SIP utiliza el UA para registrarse?
+
+    El método que utiliza el User Agent para registrarse lo podemos ver en esta trama (46), en el campo Session Initiation Protocol, en Request-Line, en Method.
+    En nuestro caso este método es el método REGISTER.
+
  ** Además de REGISTER, ¿qué instrucciones SIP entiende el UA?
- 
+
+    En la trama 46, en el campo Session Initiation Protocol, en Message Header, en Allow podemos ver los métodos de SIP que entiende el User Agent.
+    En nuestro caso vemos que los métodos que entiende el UA son: INVITE, ACK, OPTIONS, BYE, CANCEL, NOTIFY, REFER, MESSAGE.
+    Podemos ver que en este caso el UA no entiende todos los métodos existetes en SIP, que son: INVITE,ACK,BYE,CANCEL, OPTIONS, PRACK, SUSCRIBE, NOTIFY, PUBLISH, INFO,REFER, MESSAGE y UPDATE.
 
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
