@@ -166,9 +166,27 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 10. Una vez registrados, podemos efectuar una llamada. Vamos a probar con el servicio de eco de Ekiga que nos permite comprobar si nos hemos conectado correctamente. El servicio de eco tiene la dirección sip:500@ekiga.net. Veamos el INVITE de cerca.
  ** ¿Puede verse el nombre del que efectúa la llamada, así como su dirección SIP?
+
+    En la trama de INVITE, en el campo de Session Initiation Protocol, en Message Header, en el campo From podemos ver quién efectúa la llamada. Enste caso el nombre de la persona que efectúa
+    dicha llamada es Gregorio Robles, quien tiene la siguiente dirección SIP: grex@ekiga.net
+
  ** ¿Qué es lo que contiene el cuerpo de la trama? ¿En qué formato/protocolo está?
+
+    El contenido de la trama lo vemos en el campo Session Initiation Protocol, en Message Body. En este campo podemos ver que se emplea el protocolo SDP (Session Description Protocol). Además
+    vemos que contiene información de la sesión que se quiere establecer, como por ejemplo información sobre la versión de protocolo que se emplea, el creador de la sesión, información de la conexión,
+    el momento en el que se realiza la conexión, la descripción de medios con atributos.
+
  ** ¿Tiene éxito el primer intento? ¿Cómo lo sabes?
+
+    El primer intento de INVITE no tiene éxito. Esto lo podemos ver en la trama 85, en la que el servidor envía un mensaje de 407 Proxy Authentication Required. Esto se debe a que el servidor proxy 
+    requiere que se autentique.
+
  ** ¿En qué se diferencia el segundo INVITE más abajo del primero? ¿A qué crees que se debe esto?
+
+    En el segundo INVITE podemos ver que el tamaño del paquete es superior (1181 bytes) respecto al primer intento (744 bytes). El paquete es mayor debido a que en el segundo intento se incluye
+    la línea: Proxy-Authorization: Digest username="grex", realm="ekiga.net", nonce="45a439f6ba5f681cd945fb7c40529fd1e0f28a81", uri="sip:500@ekiga.net", algorithm=md5,
+    response="9a5627c14a8a433bd308d2ec54777240". Vemos que se ha incluido el campo Proxy Authorization, que es un campo necesario para poder establecer la conexión. De esta forma la conexión
+    se establecerá con éxito.
 
 
 11. Una vez conectado, estudia el intercambio de tramas.
