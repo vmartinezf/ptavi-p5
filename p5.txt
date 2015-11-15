@@ -305,8 +305,17 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 15. Identifica la trama donde se finaliza la conversación.
  ** ¿Qué método SIP se utiliza?
+
+    El método SIP que se utiliza para finalizar la conversación es BYE. Lo podemos ver en la trama 924, en Session Initiation Protocol.
+
  ** ¿En qué trama(s)?
+
+    Este método de SIP se envían en las tramas 924, 925, 927 y 933.
+
  ** ¿Por qué crees que se envía varias veces?
+
+    Vemos que se envía varias veces porque aún el servidor no ha enviado un 200 OK (estos se envían en las tramas 938, 939, 940 y 941). Esto se debe a que RTP emplea UDP, que es un protocolo no fiable,
+    entonces se envían varias veces estas tramas para asegurarse de que llega el mensaje al otro extremo, es decir, se emplea la retransmisión para mantener fiabilidad.
 
 
 16. Finalmente, se cierra la aplicación de VozIP.
