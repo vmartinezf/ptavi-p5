@@ -45,8 +45,13 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 4. Observa por encima el flujo de tramas en el menú de Statistics en IO Graphs. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias.
  ** Filtra por sip para conocer cuándo se envían paquetes SIP. ¿En qué segundos tienen lugar esos envíos?
+
+    Cuando filtramos vemos los momentos en los que se envían paquetes SIP. Se envían paquetes SIP en los siguientes segundos: 7,343770; 7,427990; 7,567714; 14,426793; 14,610573; 16,233522; 16,460741;
+    16,334756; 16,343704; 38,119195; 38,362649; 38,362673; 38,937875; 39,154151; 39,178064; 39,204022; 39,229683; 55,694378; 55,776662; 55,774638; 55,859934
+
  ** Y los paquetes con RTP, ¿cuándo se envían?
 
+    Los paquetes RTP se envían de manera casi continua apoximadamente entre los segundos 17 y 38,2 segundos.     
 
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
