@@ -230,9 +230,28 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 12. Vamos a ver más a fondo el intercambio RTP. En Telephony hay una opción RTP. Empecemos mirando los flujos RTP.
  ** ¿Cuántos flujos hay? ¿por qué?
+
+    Para poder ver los flujos RTP vamos a Telephony, pinchamos en la opción RTP y ahí en Show all streams. Aquí, podemos observar que hay dos flujos: uno es un flujo de audio en el puerto 5010
+    con codificación g.711 y otro de vídeo en el puerto 5014 con codificación h261.
+
  ** ¿Cuántos paquetes se pierden?
+
+    En Show all streams podemos ver los paquetes perdidos en el campo Lost. En este campo vemos que no se pierde ningún paquete ya que te marca 0.0%.
+
  ** ¿Cuál es el valor máximo del delta? ¿Y qué es lo que significa el valor de delta?
+
+    El mayor valor del delta es 1290,479000 ms para el flujo de vídeo, y 1290,444000 ms para el flujo de audio.
+    El valor de delta indica el valor de tiempo máximo existente entre un paquete y el anterior en el envío de paquetes RTP.
+
  ** ¿Cuáles son los valores de jitter (medio y máximo)? ¿Qué quiere decir eso? ¿Estamos ante una conversación de calidad?
+
+    Los valores de jitter máximo los miramos en Max Jitter (ms), y son los siquientes: para el caso del vídeo es de 183,095775 ms, y para el caso del audio es de 119,635154 ms.
+    Los valores de jitter medio los miramos en Mean Jitter (ms), y son los siguientes: para el flujo de vídeo es de 153,240269 ms, y para el flujo de audio es de 42,500200 ms.
+    Los paquetes del transmisor pueden llegar a su destino con diferentes retardos. Un retardo de un paquete varía impredeciblemente con su posición en las colas de los ruteadores a lo largo del 
+    camino entre el transmisor y el destino. Esta variación en retardo se conoce como jitter y puede afectar seriamente la calidad del flujo de audio y/o vídeo.
+    El jitter entre el punto inicial y final de la comunicación debiera ser ser inferior a 100 ms. En nuestro caso el jitter medio en audio es de 42,500200ms, es decir, que podemos considerar
+    que es una conversación de calidad.
+
 
 
 13. Elige un paquete RTP de audio. Analiza el flujo de audio en Telephony -> RTP -> Stream Analysis.
