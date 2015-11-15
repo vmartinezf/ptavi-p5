@@ -256,11 +256,33 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 13. Elige un paquete RTP de audio. Analiza el flujo de audio en Telephony -> RTP -> Stream Analysis.
  ** ¿Cuánto valen el delta y el jitter para el primer paquete que ha llegado?
+
+    Para poder ver cuánto valen el delta y el jitter del primer paquete que ha llegado nos metemos en Telephony, RTP, Stream Analysis, y ahí vemos estos en Delta(ms) y Filtered Jitter(ms) 
+    repectivamente. En nuestro caso el valor de delta es 0.00 ms, y el valor del jitter es de 0.00 ms.
+
  ** ¿Podemos saber si éste es el primer paquete que nos han enviado?
+
+    Sí que lo podemos saber, mediante el número de secuencia, y el marker del paquete RTP, que es TRUE y nos indica que es el primer paquete RTP de la comunicación.
+   
  ** Los valores de jitter son menores de 10ms hasta un paquete dado. ¿Cuál?
+
+    Los valores de jitter son menores de 10ms hasta el paquete 247 (vemos que paquete es el Packet). Este paquete presenta un jitter de 38,8ms.    
+
  ** ¿A qué se debe el cambio tan brusco del jitter?
+
+    Este cambio tan brusco del jitter se debe a un cambio también muy brusco en el valor de delta, que ahora es de 554,74ms, esto implica un cambio muy grande en la velocidad de transimisión de los
+    paquetes.
+    
  ** ¿Es comparable este cambio con el tiempo desde la recepción del paquete anterior? ¿Por qué?
+
+    Podemos ver que si que es comparable, ya que como hemos visto anteriormente el jitter varía en función del valor de la delta, que nos da la diferencia de teimpo entre el envío de un
+    paquete y el anterior. En este caso al tener un aumento considerable de la delta el paquete llegará mucho más tarde comparado con los paquetes enviados con anterioridad.
+
  ** ¿Cuál es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de jitter?
+
+    La dependencia entre el tiempo transcurrido desde el paquete anterior y el valor del jitter es la variabilidad del retardo. Esto se debe a que sabemos que la fórmula que se una para calcular el 
+    jitter es J(i) = J(i-1) + (|D(i-1, i)| - J(i-1))/16 , donde D(i-1, i) es la diferencia de tiempo de llegada entre un paquete y el paquete anterior, entonces la diferencia es la siguiente:
+    |D(i-1,i)| = J(i) + J(i-1))/16 - J(i-1). El jitter del paquete anterior es J(i-1). 
 
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
