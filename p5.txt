@@ -287,7 +287,20 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
  ** ¿Cuánto dura la conversación?
+
+    Al mirar en la captura en Telephony, VoIP calls, en Graph o  Flow, podemos ver los instantes de tiempo en los que se inicia y termina la conversación (esto lo vemos en el campo Time).
+    En nuestro caso la conversación comienza en el segundo 14,426793, y termina en el segundo 39,229683. Es decir, la conversación dura 24,80289 segundos (39,229683 - 14,426793).
+
  ** ¿Cuáles son sus SSRC? ¿Por qué hay varios SSRCs? ¿Hay CSRCs?
+    
+    Los SSRCs los vemos en las tramas en Synchronization Source Identifier. En nuestra captura tenemos dos SSRC-. una de audio y otra de vídeo:
+    En los paquetes de G.711 (paquetes de audio) vemos que nos encontramos con: Synchronization Source identifier: 0xbf4afd37 (3209362743), por lo que en este caso el SSRC es 0xbf4afd37 (3209362743).
+    En los paquetes de H.261 (paquetes de vídeo) observamos que tenemos: Synchronization Source identifier: 0x43306582 (1127245186), es decir, el SSRC será  0x43306582 (1127245186)
+    Tenemos varios paquetes SSRCs porque tenemos dos flujos: uno de audio y otro de vídeo.
+    Para poder ver si hay CSRCs tenemos que mirar en el campo Contributing source identifiers count, que aparecerá con valor cero si no hay CSRCs y con otro valor si existe CSRC. Si no hay CSRC quiere 
+    decir que nuetsros SSRCs no pasan por mezcladores. En RTP vemos que encontramos el campo Contributing source identifiers count a cero, es decir, no hay CSRCs. En paquetes de RTCP se ve que el 
+    campo de CSRC aparece a uno.
+    
 
 
 15. Identifica la trama donde se finaliza la conversación.
