@@ -33,21 +33,21 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
     
     En Protocol Hierarchy podemos ver que el porcentaje de UDP es mucho mayor que el correspondiente a TCP. Vemos que el porcentaje de paquetes en UDP es 96,23% frente a un 2,10% de TCP, y el 
     porcentaje en bytes de UDP es 98,94% mientras que el de TCP es 0,75%.
-    Esto si es consistente con una aplicación que transmite en tiempo real, ya que se necesita un intercambio de paquetes mayor, además UDP es bueno en este tipo de aplicaciones debido a que no se 
-    pueden realizar retrasmisiones por los retardos que existen en estas aplicaciones y sus implicaciones.
+    Esto si es consistente con una aplicación que transmite en tiempo real, ya que se necesita un intercambio de paquetes mayor, además UDP es bueno en este tipo de aplicaciones debido a que 
+    no se pueden realizar retrasmisiones por los retardos que existen en estas aplicaciones y sus implicaciones.
 
  ** ¿Qué otros protocolos podemos ver en la jerarquía de protocolos?
 
     En la jerarquía de protocolos podemos ver también RTP (Real-Time Transport Protocol), RTCP (Real-Time Transport Control Protocol), IP (Internet Protocol Version 4),
-    SIP (Session Initiation Protocol), ICMP (Internet Control Message Protocol), ARP (Address Resolution Protocol), DNS (Domain Name Service), H.261, STUN (Session Traversal Utilities for NAT) y
-    HTTP (Hypertext Transfer Protocol).
+    SIP (Session Initiation Protocol), ICMP (Internet Control Message Protocol), ARP (Address Resolution Protocol), DNS (Domain Name Service), H.261, STUN (Session Traversal Utilities for NAT) 
+    y HTTP (Hypertext Transfer Protocol).
 
 
 4. Observa por encima el flujo de tramas en el menú de Statistics en IO Graphs. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias.
  ** Filtra por sip para conocer cuándo se envían paquetes SIP. ¿En qué segundos tienen lugar esos envíos?
 
-    Cuando filtramos vemos los momentos en los que se envían paquetes SIP. Se envían paquetes SIP en los siguientes segundos: 7,343770; 7,427990; 7,567714; 14,426793; 14,610573; 16,233522; 16,460741;
-    16,334756; 16,343704; 38,119195; 38,362649; 38,362673; 38,937875; 39,154151; 39,178064; 39,204022; 39,229683; 55,694378; 55,776662; 55,774638; 55,859934
+    Cuando filtramos vemos los momentos en los que se envían paquetes SIP. Se envían paquetes SIP en los siguientes segundos: 7,343770; 7,427990; 7,567714; 14,426793; 14,610573; 16,233522;    
+    16,460741; 16,334756; 16,343704; 38,119195; 38,362649; 38,362673; 38,937875; 39,154151; 39,178064; 39,204022; 39,229683; 55,694378; 55,776662; 55,774638; 55,859934
 
  ** Y los paquetes con RTP, ¿cuándo se envían?
 
@@ -91,9 +91,9 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
     
  ** ¿Qué devuelve el servidor?
 
-    Para ver que devuelve el servidor miramos la trama de HTTP en la que se envía HTTP/1.1 200 OK. En esta trama miramos la información del paquete, y vemos en el campo Hypertext Transfer Protocol,
-    en Line-based text data la dirección IP que devuelve el servidor. Esta dirección que devuelve el servidor es la dirección pública correspondiente a la dirección IP privada 192.168.1.34, 
-    que es la dirección IP de la máquina desde la que se realizaba la captura. Tiene que pedir al servidor una dirección IP pública para poder comunicarse con otras redes.
+    Para ver que devuelve el servidor miramos la trama de HTTP en la que se envía HTTP/1.1 200 OK. En esta trama miramos la información del paquete, y vemos en el campo Hypertext Transfer 
+    Protocol, en Line-based text data la dirección IP que devuelve el servidor. Esta dirección que devuelve el servidor es la dirección pública correspondiente a la dirección IP privada 
+    192.168.1.34, que es la dirección IP de la máquina desde la que se realizaba la captura. Tiene que pedir al servidor una dirección IP pública para poder comunicarse con otras redes.
     La dirección IP que devuelve el servidor es: 83.36.48.212
     
  ** Si lanzamos el navegador web, por ejemplo, Mozilla Firefox, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor?
@@ -106,9 +106,9 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  ** ¿Por qué crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia.
 
     STUN (Session Traversal Utilities for NAT) es un protocolo de red del tipo cliente/servidor que permite a clientes NAT encontrar su dirección IP pública, el tipo de NAT en el 
-    que se encuentra y el puerto de Internet asociado con el puerto local a través de NAT. Esta información es usada para configurar una comunicación UDP entre dos hosts que se encuentren tras    
-    enrutadores NAT.SIP utiliza paquetes UDP para la señalización de tráfico de sonido, vídeo y texto sobre Internet, pero no permite establecer la comunicación cuando los extremos se encuentran 
-    detrás de enrutados NAT. Por ello suele usarse STUN en estas aplicaciones, para poder establecer la comunicación.
+    que se encuentra y el puerto de Internet asociado con el puerto local a través de NAT. Esta información es usada para configurar una comunicación UDP entre dos hosts que se encuentren 
+    tras enrutadores NAT.SIP utiliza paquetes UDP para la señalización de tráfico de sonido, vídeo y texto sobre Internet, pero no permite establecer la comunicación cuando los extremos se 
+    encuentran detrás de enrutados NAT. Por ello suele usarse STUN en estas aplicaciones, para poder establecer la comunicación.
 
     En nuestro caso se emplea porque se quiere saber la dirección IP publica de la máquina con dirección privadda, que está dentro de un NAT.
 
@@ -145,8 +145,8 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 9. Fijémonos en las tramas siguientes a la número 46:
  ** ¿Se registra con éxito en el primer intento?
 
-    En la captura, en la trama 50 podemos ver que en el primer intento no se registra con éxito, ya que el servidor envía una respuesta de 401 Unauthorized. Este mensaje aparece porque el cliente
-    se debe identificar para que se pueda registrar con éxito.
+    En la captura, en la trama 50 podemos ver que en el primer intento no se registra con éxito, ya que el servidor envía una respuesta de 401 Unauthorized. Este mensaje aparece porque el 
+    cliente se debe identificar para que se pueda registrar con éxito.
 
  ** ¿Cómo sabemos si el registro se ha realizado correctamente o no?
 
@@ -154,10 +154,11 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
  ** ¿Podrías identificar las diferencias entre el primer intento y el segundo de registro? (fíjate en el tamaño de los paquetes y mira a qué se debe el cambio)
 
-    Podemos ver que se diferencian por el tamaño, en el primer REGISTER se envían 523 bytes, mientras que en el segundo se envían 712. Esto se debe a que en el segundo intento se incluye la línea:
-    Authorization: Digest username="grex", realm="ekiga.net", nonce="45a439ee7438aaea43ae8c7c2382922187f86c8b", uri="sip:ekiga.net", algorithm=md5, response="5267d4e49d707d4443baefa913e8ff90".
-    Lo que sucede es que en el primer intento no se identifica, entonces el servidor le manda un mensaje de no autorizado con el campo Nonce (nonce="45a439ee7438aaea43ae8c7c2382922187f86c8b"), que será
-    la clave con la que se deba identificar en el próximo intento que realice, esto lo vemos en la línea anterioe en Authorization en nonce.
+    Podemos ver que se diferencian por el tamaño, en el primer REGISTER se envían 523 bytes, mientras que en el segundo se envían 712. Esto se debe a que en el segundo intento se incluye la    
+    línea: Authorization: Digest username="grex", realm="ekiga.net", nonce="45a439ee7438aaea43ae8c7c2382922187f86c8b", uri="sip:ekiga.net", algorithm=md5, 
+    response="5267d4e49d707d4443baefa913e8ff90". Lo que sucede es que en el primer intento no se identifica, entonces el servidor le manda un mensaje de no autorizado con el campo Nonce 
+    (nonce="45a439ee7438aaea43ae8c7c2382922187f86c8b"), que será la clave con la que se deba identificar en el próximo intento que realice, esto lo vemos en la línea anterioe en Authorization 
+    en nonce.
 
  ** ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica las unidades.
 
@@ -173,13 +174,13 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  ** ¿Qué es lo que contiene el cuerpo de la trama? ¿En qué formato/protocolo está?
 
     El contenido de la trama lo vemos en el campo Session Initiation Protocol, en Message Body. En este campo podemos ver que se emplea el protocolo SDP (Session Description Protocol). Además
-    vemos que contiene información de la sesión que se quiere establecer, como por ejemplo información sobre la versión de protocolo que se emplea, el creador de la sesión, información de la conexión,
-    el momento en el que se realiza la conexión, la descripción de medios con atributos.
+    vemos que contiene información de la sesión que se quiere establecer, como por ejemplo información sobre la versión de protocolo que se emplea, el creador de la sesión, información de la 
+    conexión, el momento en el que se realiza la conexión, la descripción de medios con atributos.
 
  ** ¿Tiene éxito el primer intento? ¿Cómo lo sabes?
 
-    El primer intento de INVITE no tiene éxito. Esto lo podemos ver en la trama 85, en la que el servidor envía un mensaje de 407 Proxy Authentication Required. Esto se debe a que el servidor proxy 
-    requiere que se autentique.
+    El primer intento de INVITE no tiene éxito. Esto lo podemos ver en la trama 85, en la que el servidor envía un mensaje de 407 Proxy Authentication Required. Esto se debe a que el servidor 
+    proxy requiere que se autentique.
 
  ** ¿En qué se diferencia el segundo INVITE más abajo del primero? ¿A qué crees que se debe esto?
 
@@ -199,13 +200,13 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
     
     H.261 funciona sobre RTP y permite la compresión de audio, video, videoconferencias.
 
-    El protocolo RTCP (Rel-time Transport Control Protocol) es utilizado para enviar datos de control entre el emisor y receptor de una secuencia RTP. Los paquetes RTCP son enviados aproximadamente
-    cada cinco segundos, y contienen datos que ayudan a verificar las condiciones de transmisión en el extremo remoto. 
+    El protocolo RTCP (Rel-time Transport Control Protocol) es utilizado para enviar datos de control entre el emisor y receptor de una secuencia RTP. Los paquetes RTCP son enviados 
+    aproximadamente cada cinco segundos, y contienen datos que ayudan a verificar las condiciones de transmisión en el extremo remoto. 
     
-    El protocolo ARP (Address Resolution Protocol) es un protocolo de comunicaciones de la capa de enlace de datos, responsable de encontrar la dirección de hardware (Ethernet MAC) que corresponde a
-    una determinada dirección IP. Para ello se envía un paquete (ARP request) a la dirección de difusión de la red (broadcast, MAC = FF FF FF FF FF FF) que contiene la dirección IP por la que se 
-    pregunta, y se espera a que esa máquina (u otra) responda (ARP reply) con la dirección Ethernet que le corresponde. Cada máquina mantiene una caché con las direcciones traducidas para reducir el
-    retardo y la carga. ARP permite a la dirección de Internet ser independiente de la dirección Ethernet, pero esto solo funciona si todas las máquinas lo soportan.
+    El protocolo ARP (Address Resolution Protocol) es un protocolo de comunicaciones de la capa de enlace de datos, responsable de encontrar la dirección de hardware (Ethernet MAC) que 
+    corresponde a una determinada dirección IP. Para ello se envía un paquete (ARP request) a la dirección de difusión de la red (broadcast, MAC = FF FF FF FF FF FF) que contiene la dirección 
+    IP por la que se pregunta, y se espera a que esa máquina (u otra) responda (ARP reply) con la dirección Ethernet que le corresponde. Cada máquina mantiene una caché con las direcciones 
+    traducidas para reducir el retardo y la carga. ARP permite a la dirección de Internet ser independiente de la dirección Ethernet, pero esto solo funciona si todas las máquinas lo soportan.
     
  ** ¿Cuál es el tamaño de paquete de los mismos?
 
@@ -270,8 +271,8 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
  ** ¿A qué se debe el cambio tan brusco del jitter?
 
-    Este cambio tan brusco del jitter se debe a un cambio también muy brusco en el valor de delta, que ahora es de 554,74ms, esto implica un cambio muy grande en la velocidad de transimisión de los
-    paquetes.
+    Este cambio tan brusco del jitter se debe a un cambio también muy brusco en el valor de delta, que ahora es de 554,74ms, esto implica un cambio muy grande en la velocidad de transimisión 
+    de los paquetes.
     
  ** ¿Es comparable este cambio con el tiempo desde la recepción del paquete anterior? ¿Por qué?
 
@@ -280,9 +281,9 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
  ** ¿Cuál es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de jitter?
 
-    La dependencia entre el tiempo transcurrido desde el paquete anterior y el valor del jitter es la variabilidad del retardo. Esto se debe a que sabemos que la fórmula que se una para calcular el 
-    jitter es J(i) = J(i-1) + (|D(i-1, i)| - J(i-1))/16 , donde D(i-1, i) es la diferencia de tiempo de llegada entre un paquete y el paquete anterior, entonces la diferencia es la siguiente:
-    |D(i-1,i)| = J(i) + J(i-1))/16 - J(i-1). El jitter del paquete anterior es J(i-1). 
+    La dependencia entre el tiempo transcurrido desde el paquete anterior y el valor del jitter es la variabilidad del retardo. Esto se debe a que sabemos que la fórmula que se una para 
+    calcular el jitter es J(i) = J(i-1) + (|D(i-1, i)| - J(i-1))/16 , donde D(i-1, i) es la diferencia de tiempo de llegada entre un paquete y el paquete anterior, entonces la diferencia es la 
+    siguiente: |D(i-1,i)| = J(i) + J(i-1))/16 - J(i-1). El jitter del paquete anterior es J(i-1). 
 
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
@@ -294,12 +295,13 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  ** ¿Cuáles son sus SSRC? ¿Por qué hay varios SSRCs? ¿Hay CSRCs?
     
     Los SSRCs los vemos en las tramas en Synchronization Source Identifier. En nuestra captura tenemos dos SSRC-. una de audio y otra de vídeo:
-    En los paquetes de G.711 (paquetes de audio) vemos que nos encontramos con: Synchronization Source identifier: 0xbf4afd37 (3209362743), por lo que en este caso el SSRC es 0xbf4afd37 (3209362743).
+    En los paquetes de G.711 (paquetes de audio) vemos que nos encontramos con: Synchronization Source identifier: 0xbf4afd37 (3209362743), por lo que en este caso el SSRC es 
+    0xbf4afd37 (3209362743).
     En los paquetes de H.261 (paquetes de vídeo) observamos que tenemos: Synchronization Source identifier: 0x43306582 (1127245186), es decir, el SSRC será  0x43306582 (1127245186)
     Tenemos varios paquetes SSRCs porque tenemos dos flujos: uno de audio y otro de vídeo.
-    Para poder ver si hay CSRCs tenemos que mirar en el campo Contributing source identifiers count, que aparecerá con valor cero si no hay CSRCs y con otro valor si existe CSRC. Si no hay CSRC quiere 
-    decir que nuetsros SSRCs no pasan por mezcladores. En RTP vemos que encontramos el campo Contributing source identifiers count a cero, es decir, no hay CSRCs. En paquetes de RTCP se ve que el 
-    campo de CSRC aparece a uno.
+    Para poder ver si hay CSRCs tenemos que mirar en el campo Contributing source identifiers count, que aparecerá con valor cero si no hay CSRCs y con otro valor si existe CSRC. Si no hay 
+    CSRC quiere decir que nuetsros SSRCs no pasan por mezcladores. En RTP vemos que encontramos el campo Contributing source identifiers count a cero, es decir, no hay CSRCs. En paquetes de 
+    RTCP se ve que el campo de CSRC aparece a uno.
     
 
 
@@ -314,8 +316,8 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
  ** ¿Por qué crees que se envía varias veces?
 
-    Vemos que se envía varias veces porque aún el servidor no ha enviado un 200 OK (estos se envían en las tramas 938, 939, 940 y 941). Esto se debe a que RTP emplea UDP, que es un protocolo no fiable,
-    entonces se envían varias veces estas tramas para asegurarse de que llega el mensaje al otro extremo, es decir, se emplea la retransmisión para mantener fiabilidad.
+    Vemos que se envía varias veces porque aún el servidor no ha enviado un 200 OK (estos se envían en las tramas 938, 939, 940 y 941). Esto se debe a que RTP emplea UDP, que es un protocolo 
+    no fiable, entonces se envían varias veces estas tramas para asegurarse de que llega el mensaje al otro extremo, es decir, se emplea la retransmisión para mantener fiabilidad.
 
 
 16. Finalmente, se cierra la aplicación de VozIP.
