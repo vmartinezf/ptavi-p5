@@ -364,13 +364,26 @@ Captura una sesión SIP de una conversación con el número SIP sip:9999@qxip.ne
 18. Identifica las diferencias existentes entre esta conversación y la conversación anterior:
  ** ¿Cuántos flujos tenemos?
 
-    
+    Cuando empleamos Telephony, RTP, Show All Streams, podemos ver los flujos existentes. En nuestro caso vamos que hay dos flujos de audio, codificado en g.711. Uno de los flujos va en la dirección
+    desde nosotros que somos emisores hacia un receptor, y el otro flujo va en el sentido contrario.
 
  ** ¿Cuál es su periodicidad?
+
+    Podemos ver que que la diferencia del timestamp en este caso es 160 también, por lo tanto la periodicidad sigue siendo la misma que en la captura anterior, es decir, 0,02 segundos.
+
  ** ¿Cuánto es el valor máximo del delta y los valores medios y máximo del jitter?
+
+    En el caso del flujo del emisor de la llamada, el valor máximo de delta es 32,534000 ms; el valor medio del jitter es 3,244855 ms; y el valor del máximo jitter es 5,172200 ms.
+    En el caso del flujo de la otra dirección, el valor máximo de delta es 30,750000 ms; el valor medio del jitter es 3,133588 ms; y el valor del máximo jitter es 5,175524 ms.
+
  ** ¿Podrías reproducir la conversación desde Wireshark? ¿Cómo? Comprueba que poniendo un valor demasiado pequeño para el buffer de jitter, la conversación puede no tener la calidad necesaria.
+
+    Para poder reproducir la conversación desde Wireshark, debemos ir a Telephony y elegir la opción VoIP Calls, después primero damos a Play y luego Decode, y de esta forma se reproduce.
+    Al reproducir con un buffer de jitter muy pequeño la conversación se escucha entrecortada, se pierden palabras, lo he comprobado con un buffer de 5ms y no es muy buena la calidad.
+
  ** ¿Sabrías decir qué tipo de servicio ofrece sip:9999@qxip.net?
 
+    sip:9999@qxip.net ofrece un servicio de canciones como podemos observar al reproducir el audio.
 
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
